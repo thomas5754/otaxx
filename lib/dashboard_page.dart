@@ -47,6 +47,9 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'dart:io';
 import 'main.dart';
+
+
+
 class SholatService {
  String _getTimeZone(double longitude) {
 
@@ -2789,7 +2792,7 @@ Widget _buildWhatsAppHeader() {
                   border: Border.all(color: Colors.white.withOpacity(0.25), width: 2),
                 ),
                 child: Center(
-                  child: FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white, size: 36),
+                  child: Icon(FontAwesomeIcons.whatsapp, color: Colors.white, size: 36),
                 ),
               ),
               SizedBox(height: 10),
@@ -3322,7 +3325,7 @@ final Color purpleGradientStart = const Color(0xFF8E0000);
 final Color purpleGradientEnd = const Color(0xFFFF1744);
 
   Widget _buildCompactInfoItem({
-    required FaIconData icon,
+    required Object? icon,
     required String label,
     required String value,
     Color valueColor = Colors.white,
@@ -3594,7 +3597,7 @@ Widget _buildCompactTimeZone({
 }
 
   Widget _buildQuickStat({
-    required FaIconData icon,
+    required Object? icon,
     required String label,
     required String value,
   }) {
@@ -3672,7 +3675,7 @@ Widget _buildCompactTimeZone({
   }
 // Widget stat dengan indikator live
 Widget _buildRealTimeStatChip({
-  required FaIconData icon,
+  required Object? icon,
   required String value,
   required String label,
   required Color color,
@@ -5454,7 +5457,7 @@ String _getTimeQuote(String period) {
 Widget _buildPrayerTimeCard({
   required String prayerName,
   required String time,
-  required FaIconData icon,
+  required Object? icon,
   required Gradient gradient,
   required bool isNext,
 }) {
@@ -5602,7 +5605,7 @@ Widget _buildPrayerTimeCard({
 Widget _buildSholatCarouselCard({
   required String name,
   required String time,
-  required FaIconData icon,
+  required Object? icon,
   required Gradient gradient,
   required bool isNext,
 }) {
@@ -6949,7 +6952,7 @@ void _showFullHadithPage() {
   );
 }
 Widget _buildStatChip({
-  required FaIconData icon,
+  required Object? icon,
   required String value,
   required String label,
   required Color color,
@@ -7154,7 +7157,7 @@ Widget _buildNewsCard(Map<String, dynamic> item, int index) {
 Widget _buildActionTile({
   required String title,
   required String subtitle,
-  required FaIconData icon,
+  required Object? icon,
   required Color iconColor,
   required List<Color> gradient,
   required VoidCallback onTap,
@@ -7346,7 +7349,7 @@ Widget _buildStatusIndicator({
 
 // Social Button
 Widget _buildSocialButton({
-  required FaIconData icon,
+  required Object? icon,
   required Color color,
   required String label,
   String? url,
@@ -7402,7 +7405,7 @@ Widget _buildSocialButton({
 Widget _buildPremiumCard({
   required String title,
   required String subtitle,
-  required FaIconData icon,
+  required Object? icon,
   required Color iconColor,
   required List<Color> gradientColors,
   required VoidCallback onTap,
@@ -7598,7 +7601,7 @@ Widget _buildPremiumCard({
 
 // Widget untuk Mini Action Button
 Widget _buildMiniActionButton({
-  required FaIconData icon,
+  required Object? icon,
   required String label,
   required Color color,
 }) {
@@ -7660,7 +7663,7 @@ Widget _buildMiniActionButton({
   }
 
   Widget _contactActionButton({
-    required FaIconData icon,
+    required Object? icon,
     required String label,
     required String url,
     required Color color,
@@ -8363,7 +8366,7 @@ Widget _buildDrawer() {
 
 // Helper untuk membuat menu item yang elegan
 Widget _buildMenuItem({
-  required FaIconData icon,
+  required Object? icon,
   required String title,
   required Color accentRed,
   required Color darkRed,
@@ -8572,7 +8575,7 @@ Widget _buildGlassBottomNavBar() {
 }
 Widget _buildNavItem({
   required int index,
-  required FaIconData icon,
+  required Object? icon,
   required String label,
   required IconData activeIcon,
 }) {

@@ -1404,7 +1404,7 @@ class _DashboardPageTelegramState extends State<DashboardPageTelegram> {
   Widget _buildStatCard({
     required String title,
     required String value,
-    required FaIconData icon,
+    required IconData icon,
     required Color color,
   }) {
     return Container(
@@ -1449,7 +1449,7 @@ class _DashboardPageTelegramState extends State<DashboardPageTelegram> {
 
   Widget _buildActionButton({
     required String title,
-    required FaIconData icon,
+    required IconData icon,
     required Color color,
     required VoidCallback onTap,
   }) {
@@ -2527,7 +2527,7 @@ class _ReportPageState extends State<ReportPage> {
     required String label,
     required String hint,
     required TextEditingController controller,
-    required FaIconData icon,
+    required IconData icon,
     TextInputType? keyboardType,
     String? Function(String?)? validator,
     int maxLines = 1,
@@ -3329,7 +3329,7 @@ class _ReportPageState extends State<ReportPage> {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Icon(
-                                            _isReporting ? Icons.send_rounded : Icons.report_rounded,
+                                            _isReporting ? FontAwesomeIcons.telegram_rounded : Icons.report_rounded,
                                             size: 20,
                                           ),
                                           const SizedBox(width: 10),
