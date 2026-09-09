@@ -1990,7 +1990,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
           ),
           child: Center(
             child: Icon(
-              isWhatsApp ? FontAwesomeIcons.whatsapp : Icons.telegram,
+              isWhatsApp ? FontAwesomeIcons.whatsapp : null,
               color: isWhatsApp ? _whatsappColor : _telegramColor,
               size: 20,
             ),

@@ -1692,7 +1692,7 @@ class _TF extends StatelessWidget {
 class _TFfa extends StatelessWidget {
   final TextEditingController ctrl;
   final String hint;
-  final IconData faIcon;
+  final FaIconData faIcon;
   final TextInputType kb;
   final Color accentColor;
   const _TFfa({required this.ctrl, required this.hint, required this.faIcon,
@@ -1740,7 +1740,8 @@ class _CtxBtn extends StatelessWidget {
   final String label, value;
   final Color color;
   final VoidCallback onTap;
-  final IconData? icon, faIcon;
+  final IconData? icon;
+  final FaIconData? faIcon;
   const _CtxBtn({required this.label, required this.value, required this.color,
     required this.onTap, this.icon, this.faIcon});
   @override
