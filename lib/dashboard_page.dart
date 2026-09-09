@@ -2792,7 +2792,7 @@ Widget _buildWhatsAppHeader() {
                   border: Border.all(color: Colors.white.withOpacity(0.25), width: 2),
                 ),
                 child: Center(
-                  child: Icon(FontAwesomeIcons.whatsapp, color: Colors.white, size: 36),
+                  child: FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white, size: 36),
                 ),
               ),
               SizedBox(height: 10),
@@ -3325,7 +3325,7 @@ final Color purpleGradientStart = const Color(0xFF8E0000);
 final Color purpleGradientEnd = const Color(0xFFFF1744);
 
   Widget _buildCompactInfoItem({
-    required Object? icon,
+    required FaIconData icon,
     required String label,
     required String value,
     Color valueColor = Colors.white,
@@ -3347,7 +3347,7 @@ final Color purpleGradientEnd = const Color(0xFFFF1744);
               color: primaryPurple.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: lightPurple, size: 16),
+            child: FaFaIcon(icon, color: lightPurple, size: 16),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -3597,7 +3597,7 @@ Widget _buildCompactTimeZone({
 }
 
   Widget _buildQuickStat({
-    required Object? icon,
+    required FaIconData icon,
     required String label,
     required String value,
   }) {
@@ -3610,7 +3610,7 @@ Widget _buildCompactTimeZone({
         ),
         child: Row(
           children: [
-            Icon(icon, color: Colors.white70, size: 20),
+            FaFaIcon(icon, color: Colors.white70, size: 20),
             const SizedBox(width: 8),
             Expanded(
               child: Column(
@@ -3675,7 +3675,7 @@ Widget _buildCompactTimeZone({
   }
 // Widget stat dengan indikator live
 Widget _buildRealTimeStatChip({
-  required Object? icon,
+  required FaIconData icon,
   required String value,
   required String label,
   required Color color,
@@ -5457,7 +5457,7 @@ String _getTimeQuote(String period) {
 Widget _buildPrayerTimeCard({
   required String prayerName,
   required String time,
-  required Object? icon,
+  required FaIconData icon,
   required Gradient gradient,
   required bool isNext,
 }) {
@@ -5605,7 +5605,7 @@ Widget _buildPrayerTimeCard({
 Widget _buildSholatCarouselCard({
   required String name,
   required String time,
-  required Object? icon,
+  required FaIconData icon,
   required Gradient gradient,
   required bool isNext,
 }) {
@@ -6952,7 +6952,7 @@ void _showFullHadithPage() {
   );
 }
 Widget _buildStatChip({
-  required Object? icon,
+  required FaIconData icon,
   required String value,
   required String label,
   required Color color,
@@ -7157,7 +7157,7 @@ Widget _buildNewsCard(Map<String, dynamic> item, int index) {
 Widget _buildActionTile({
   required String title,
   required String subtitle,
-  required Object? icon,
+  required FaIconData icon,
   required Color iconColor,
   required List<Color> gradient,
   required VoidCallback onTap,
@@ -7349,7 +7349,7 @@ Widget _buildStatusIndicator({
 
 // Social Button
 Widget _buildSocialButton({
-  required Object? icon,
+  required FaIconData icon,
   required Color color,
   required String label,
   String? url,
@@ -7405,7 +7405,7 @@ Widget _buildSocialButton({
 Widget _buildPremiumCard({
   required String title,
   required String subtitle,
-  required Object? icon,
+  required FaIconData icon,
   required Color iconColor,
   required List<Color> gradientColors,
   required VoidCallback onTap,
@@ -7601,7 +7601,7 @@ Widget _buildPremiumCard({
 
 // Widget untuk Mini Action Button
 Widget _buildMiniActionButton({
-  required Object? icon,
+  required FaIconData icon,
   required String label,
   required Color color,
 }) {
@@ -7663,7 +7663,7 @@ Widget _buildMiniActionButton({
   }
 
   Widget _contactActionButton({
-    required Object? icon,
+    required FaIconData icon,
     required String label,
     required String url,
     required Color color,
@@ -7694,7 +7694,7 @@ Widget _buildMiniActionButton({
                 ),
               ],
             ),
-            child: Icon(icon, color: color, size: 24),
+            child: FaIcon(icon, color: color, size: 24),
           ),
           const SizedBox(height: 8),
           Text(
@@ -7750,7 +7750,7 @@ Widget _buildMiniActionButton({
               color: bloodRed.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: bloodRed, size: 20),
+            child: FaIcon(icon, color: bloodRed, size: 20),
           ),
           const SizedBox(width: 12),
           Text("$label: ", style: const TextStyle(color: Colors.white70)),
@@ -8366,7 +8366,7 @@ Widget _buildDrawer() {
 
 // Helper untuk membuat menu item yang elegan
 Widget _buildMenuItem({
-  required Object? icon,
+  required FaIconData icon,
   required String title,
   required Color accentRed,
   required Color darkRed,
@@ -8547,9 +8547,9 @@ Widget _buildGlassBottomNavBar() {
                     ),
                     _buildNavItem(
                       index: 1,
-                      icon: FontAwesomeIcons.whatsapp,
+                      icon: Icons.message,
                       label: "WhatsApp",
-                      activeIcon: FontAwesomeIcons.whatsappSquare,
+                      activeIcon: Icons.message_rounded,
                     ),
                     _buildNavItem(
                       index: 2,
@@ -8575,7 +8575,7 @@ Widget _buildGlassBottomNavBar() {
 }
 Widget _buildNavItem({
   required int index,
-  required Object? icon,
+  required FaIconData icon,
   required String label,
   required IconData activeIcon,
 }) {
@@ -8980,7 +8980,7 @@ class _ModernActionCard extends StatelessWidget {
                             color: Colors.white.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Icon(icon, color: Colors.white, size: 28),
+                          child: FaIcon(icon, color: Colors.white, size: 28),
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(

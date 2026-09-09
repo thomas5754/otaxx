@@ -1317,7 +1317,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
             borderRadius: BorderRadius.circular(12),
           ),
           child: Center(
-            child: Icon(icon, color: Colors.white, size: 24),
+            child: FaIcon(icon, color: Colors.white, size: 24),
           ),
         ),
         const SizedBox(width: 16),
@@ -1452,7 +1452,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
                 color: color.withOpacity(0.1),
               ),
               child: Center(
-                child: Icon(icon, color: color, size: 18),
+                child: FaIcon(icon, color: color, size: 18),
               ),
             ),
             const SizedBox(width: 12),
@@ -1524,7 +1524,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 16),
-                child: Icon(icon, color: _textSecondary, size: 20),
+                child: FaIcon(icon, color: _textSecondary, size: 20),
               ),
               Expanded(
                 child: Padding(
@@ -1758,7 +1758,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: color, size: 16),
+          FaIcon(icon, color: color, size: 16),
           const SizedBox(width: 12),
           Expanded(
             child: Text(

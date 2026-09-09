@@ -1423,7 +1423,7 @@ class _DashboardPageTelegramState extends State<DashboardPageTelegram> {
               shape: BoxShape.circle,
               color: color.withOpacity(0.1),
             ),
-            child: Icon(icon, color: color, size: 20),
+            child: FaIcon(icon, color: color, size: 20),
           ),
           const SizedBox(height: 8),
           Text(
@@ -2568,7 +2568,7 @@ class _ReportPageState extends State<ReportPage> {
                 horizontal: 16,
                 vertical: maxLines == 1 ? 16 : 12,
               ),
-              prefixIcon: Icon(icon, color: _textSecondary, size: 20),
+              prefixIcon: FaIcon(icon, color: _textSecondary, size: 20),
               prefixText: prefixText,
               prefixStyle: TextStyle(color: _textPrimary),
             ),
@@ -2590,7 +2590,7 @@ class _ReportPageState extends State<ReportPage> {
             color: _primaryRed.withOpacity(0.1),
             border: Border.all(color: _primaryRed.withOpacity(0.2)),
           ),
-          child: Icon(icon, color: _primaryRed, size: 22),
+          child: FaIcon(icon, color: _primaryRed, size: 22),
         ),
         const SizedBox(height: 8),
         Text(
@@ -3329,7 +3329,7 @@ class _ReportPageState extends State<ReportPage> {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Icon(
-                                            _isReporting ? FontAwesomeIcons.telegram_rounded : Icons.report_rounded,
+                                            _isReporting ? FontAwesomeIcons.telegram : Icons.report_rounded,
                                             size: 20,
                                           ),
                                           const SizedBox(width: 10),
