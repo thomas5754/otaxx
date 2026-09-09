@@ -3325,7 +3325,7 @@ final Color purpleGradientStart = const Color(0xFF8E0000);
 final Color purpleGradientEnd = const Color(0xFFFF1744);
 
   Widget _buildCompactInfoItem({
-    required FaIconData icon,
+    required Object? icon,
     required String label,
     required String value,
     Color valueColor = Colors.white,
@@ -3347,7 +3347,7 @@ final Color purpleGradientEnd = const Color(0xFFFF1744);
               color: primaryPurple.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
-            child: FaFaIcon(icon, color: lightPurple, size: 16),
+            child: FaIcon(icon, color: lightPurple, size: 16),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -3597,7 +3597,7 @@ Widget _buildCompactTimeZone({
 }
 
   Widget _buildQuickStat({
-    required FaIconData icon,
+    required Object? icon,
     required String label,
     required String value,
   }) {
@@ -3610,7 +3610,7 @@ Widget _buildCompactTimeZone({
         ),
         child: Row(
           children: [
-            FaFaIcon(icon, color: Colors.white70, size: 20),
+            FaIcon(icon, color: Colors.white70, size: 20),
             const SizedBox(width: 8),
             Expanded(
               child: Column(
@@ -3675,7 +3675,7 @@ Widget _buildCompactTimeZone({
   }
 // Widget stat dengan indikator live
 Widget _buildRealTimeStatChip({
-  required FaIconData icon,
+  required Object? icon,
   required String value,
   required String label,
   required Color color,
@@ -3705,7 +3705,7 @@ Widget _buildRealTimeStatChip({
               ),
             ),
             child: Center(
-              child: Icon(
+              child: FaIcon(
                 icon,
                 color: color,
                 size: 24,
@@ -5509,7 +5509,7 @@ Widget _buildPrayerTimeCard({
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
-                      child: Icon(
+                      child: FaIcon(
                         icon,
                         color: Colors.white,
                         size: 18,
@@ -5658,7 +5658,7 @@ Widget _buildSholatCarouselCard({
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
-                      child: Icon(
+                      child: FaIcon(
                         icon,
                         color: Colors.white,
                         size: 16,
@@ -6952,7 +6952,7 @@ void _showFullHadithPage() {
   );
 }
 Widget _buildStatChip({
-  required FaIconData icon,
+  required Object? icon,
   required String value,
   required String label,
   required Color color,
@@ -6978,7 +6978,7 @@ Widget _buildStatChip({
           ),
         ),
         child: Center(
-          child: Icon(
+          child: FaIcon(
             icon,
             color: color,
             size: 24,
@@ -7157,7 +7157,7 @@ Widget _buildNewsCard(Map<String, dynamic> item, int index) {
 Widget _buildActionTile({
   required String title,
   required String subtitle,
-  required FaIconData icon,
+  required Object? icon,
   required Color iconColor,
   required List<Color> gradient,
   required VoidCallback onTap,
@@ -7199,7 +7199,7 @@ Widget _buildActionTile({
                   ),
                 ),
                 child: Center(
-                  child: Icon(
+                  child: FaIcon(
                     icon,
                     color: Colors.white,
                     size: 24,
@@ -7380,7 +7380,7 @@ Widget _buildSocialButton({
             ),
           ),
           child: Center(
-            child: Icon(
+            child: FaIcon(
               icon,
               color: color,
               size: 24,
@@ -7472,7 +7472,7 @@ Widget _buildPremiumCard({
                           ),
                         ),
                         child: Center(
-                          child: Icon(
+                          child: FaIcon(
                             icon,
                             color: iconColor,
                             size: 32,
@@ -7619,7 +7619,7 @@ Widget _buildMiniActionButton({
           ),
         ),
         child: Center(
-          child: Icon(
+          child: FaIcon(
             icon,
             color: color,
             size: 28,
@@ -7750,7 +7750,7 @@ Widget _buildMiniActionButton({
               color: bloodRed.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
-            child: FaIcon(icon, color: bloodRed, size: 20),
+            child: Icon(icon, color: bloodRed, size: 20),
           ),
           const SizedBox(width: 12),
           Text("$label: ", style: const TextStyle(color: Colors.white70)),
@@ -8366,7 +8366,7 @@ Widget _buildDrawer() {
 
 // Helper untuk membuat menu item yang elegan
 Widget _buildMenuItem({
-  required FaIconData icon,
+  required IconData icon,
   required String title,
   required Color accentRed,
   required Color darkRed,
@@ -8575,7 +8575,7 @@ Widget _buildGlassBottomNavBar() {
 }
 Widget _buildNavItem({
   required int index,
-  required FaIconData icon,
+  required IconData icon,
   required String label,
   required IconData activeIcon,
 }) {
