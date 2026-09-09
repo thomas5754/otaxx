@@ -1,0 +1,31 @@
+{
+  "project_info": {
+    "project_number": "923733662598",
+    "project_id": "otax-ceada",
+    "project_url": "https://otax-ceada.firebaseio.com",
+    "storage_bucket": "otax-ceada.firebasestorage.app",
+    "firebase_url": "https://otax-ceada-default-rtdb.asia-southeast1.firebasedatabase.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923733662598:android:559d978b0c3821ce4daa07",
+        "android_client_info": {
+          "package_name": "com.otax.ayun"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsNTcYxkfV2ynJJoTmSjU_5tCgnxpGFlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

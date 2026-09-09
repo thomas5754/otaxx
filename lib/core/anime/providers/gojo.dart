@@ -1,0 +1,157 @@
+import 'dart:convert';
+
+import 'package:otax/core/anime/providers/animeProvider.dart';
+import 'package:otax/core/anime/providers/types.dart';
+import 'package:otax/core/app/runtimeDatas.dart';
+import 'package:otax/core/commons/enums.dart';
+import 'package:http/http.dart';
+
+//use anilist for searching
+class Gojo extends AnimeProvider {
+  static const String apiUrl = "https://b.animetsu.live/api/anime";
+  // static const String _apiBaseUrl = "https://b.animetsu.live";
+  static const String _proxyUrl = "https://ani.metsu.site/proxy";
+
+  final baseUrl = "https://animetsu.live";
+
+  final headers = {
+    'Origin': 'https://animetsu.live',
+    'Referer': 'https://animetsu.live/',
+  };
+
+  @override
+  final String providerName = "gojo";
+
+  @override
+  Future<List<Map<String, String>>> search(String query) async {
+    final res = await get(Uri.parse("$apiUrl/search/?query=$query"), headers: headers);
+    final List<Map<String, dynamic>> json = List.castFrom(jsonDecode(res.body)['results']);
+    final List<Map<String, String>> sr = [];
+    for (final item in json) {
+      sr.add({
+        'name': item['title']['english'] ?? item['title']['romaji'] ?? '',
+        'alias': item['id'].toString(),
+        'imageUrl': item['cover_image']['medium'],
+      });
+    }
+
+    return sr;
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getAnimeEpisodeLink(String aliasId, {bool dub = false}) async {
+    //alias id here is the anilist id
+
+    final url = Uri.parse("$apiUrl/eps/$aliasId");
+    final res = await get(url, headers: headers);
+    final List<Map<String, dynamic>> json = List.castFrom(jsonDecode(res.body));
+    final newSht = json.map<Map<String, dynamic>>((item) {
+      final int epNum = item['ep_num']?.toInt();
+      final bool isFiller = item['is_filler'];
+      String? img = item['img'];
+      if (img?.startsWith("/") ?? false) {
+        img = "$_proxyUrl" + img!;
+      }
+      final String? title = item['name'];
+
+      return {
+        'episodeLink': "$aliasId", // used for getting other stuff
+        'episodeNumber': epNum,
+        'filler': isFiller,
+        'thumbnail': img,
+        'episodeTitle': title,
+        'hasDub': true,
+        'metadata': "$epNum",
+      };
+    }).toList();
+
+    return newSht;
+  }
+
+  @override
+  Future<void> getStreams(String epLink, Function(List<VideoStream> list, bool isFinished) update,
+      {bool dub = false, String? metadata}) async {
+    final id = epLink;
+    final epNum = metadata;
+    if (metadata == null) throw Exception("Couldnt get streams, required field metadata recieved null.");
+
+    final List<Future<Response>> futures = [];
+
+    final serverList = await get(Uri.parse("$apiUrl/servers/$id/$epNum"), headers: headers);
+    final List<Map<String, dynamic>> serversJson = List.castFrom(jsonDecode(serverList.body));
+    print(serversJson);
+    serversJson.forEach((it) {
+      final url = "$apiUrl/oppai/$id/$epNum?server=${it['id']}&source_type=${dub ? "dub" : "sub"}";
+      final res = get(Uri.parse(url), headers: headers);
+      futures.add(res);
+    });
+
+    final its = await futures.wait;
+
+    int doneSources = 0;
+    final int totalSources = futures.length;
+
+    its.forEach((item) {
+      final json = jsonDecode(item.body);
+
+      final List<dynamic>? sources = json?['sources'];
+      final List<dynamic>? subtitles = json?['subs'];
+
+      doneSources++;
+
+      if (sources?.isEmpty == true) return update([], doneSources == totalSources);
+
+      final provider = item.request?.url.queryParameters['server'] ?? '';
+
+      // Ambil preferensi bahasa subtitle dari settings
+      final String preferredLang = (currentUserSettings?.preferredSubtitleLanguage ?? "English").toLowerCase();
+
+      // Cari subtitle sesuai preferensi bahasa
+      String? subs;
+      if (subtitles != null && subtitles.isNotEmpty) {
+        // Coba cari label sesuai bahasa preferensi
+        final preferred = subtitles.where((it) => it['lang']?.toString().toLowerCase() == preferredLang).firstOrNull;
+        if (preferred != null) {
+          subs = preferred['url'] as String?;
+        } else if (preferredLang == "indonesian" || preferredLang == "indonesia") {
+          // Coba variasi label Indonesia
+          final indoSub = subtitles.where((it) {
+            final lang = it['lang']?.toString().toLowerCase() ?? "";
+            return lang == "id" || lang == "indo" || lang == "indonesia" || lang == "indonesian" || lang.contains("indo");
+          }).firstOrNull;
+          subs = (indoSub?['url'] ?? subtitles.firstOrNull?['url']) as String?;
+        } else {
+          // Fallback ke English lalu ke yang pertama
+          subs = (subtitles.where((it) => it['lang'] == "English").firstOrNull?['url'] ??
+              subtitles.firstOrNull?['url']) as String?;
+        }
+      }
+
+      sources?.forEach((i) => update(
+            [
+              VideoStream(
+                quality: i['quality']?.trim() == 'master' ? "multi-quality" : i['quality'],
+                url: (i['url'] as String).startsWith("/") ? "$_proxyUrl${i['url']}" : i['url'],
+                server: provider,
+                backup: false,
+                subtitleFormat: SubtitleFormat.VTT.name, // gojo uses vtt mainly
+                customHeaders: headers,
+                subtitle: subs != null
+                    ? subs.startsWith("/")
+                        ? "$_proxyUrl${subs}"
+                        : subs
+                    : null,
+              )
+            ],
+            doneSources == totalSources,
+          ));
+    });
+  }
+
+  @override
+  Future<void> getDownloadSources(String episodeUrl, Function(List<VideoStream> p1, bool p2) update,
+      {bool dub = false, String? metadata}) {
+    // download the stream
+    throw UnimplementedError();
+  }
+}
