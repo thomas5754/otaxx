@@ -7634,7 +7634,7 @@ Widget _buildMiniActionButton({
           ),
         ),
         child: Center(
-          child: Icon(
+          child: _anyIcon(
             icon,
             color: color,
             size: 28,
@@ -8997,7 +8997,7 @@ class _ModernActionCard extends StatelessWidget {
                             color: Colors.white.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: _anyIcon(icon, color: Colors.white, size: 28),
+                          child: icon is FaIconData ? FaIcon(icon, color: Colors.white, size: 28) : icon is IconData ? Icon(icon, color: Colors.white, size: 28) : const SizedBox.shrink(),
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(

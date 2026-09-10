@@ -1767,7 +1767,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
     );
   }
 
-  Widget _buildInfoItem(String text, IconData icon, Color color) {
+  Widget _buildInfoItem(String text, Object? icon, Color color) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
@@ -2004,7 +2004,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
             color: isWhatsApp ? _whatsappColor.withOpacity(0.1) : _telegramColor.withOpacity(0.1),
           ),
           child: Center(
-            child: Icon(
+            child: _anyIcon(
               isWhatsApp ? FontAwesomeIcons.whatsapp : Icons.telegram,
               color: isWhatsApp ? _whatsappColor : _telegramColor,
               size: 20,
