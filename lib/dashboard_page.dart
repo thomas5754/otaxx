@@ -5524,7 +5524,7 @@ Widget _buildPrayerTimeCard({
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
-                      child: Icon(
+                      child: _anyIcon(
                         icon,
                         color: Colors.white,
                         size: 18,
@@ -5673,7 +5673,7 @@ Widget _buildSholatCarouselCard({
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
-                      child: Icon(
+                      child: _anyIcon(
                         icon,
                         color: Colors.white,
                         size: 16,
@@ -7395,7 +7395,7 @@ Widget _buildSocialButton({
             ),
           ),
           child: Center(
-            child: Icon(
+            child: _anyIcon(
               icon,
               color: color,
               size: 24,
@@ -7487,7 +7487,7 @@ Widget _buildPremiumCard({
                           ),
                         ),
                         child: Center(
-                          child: Icon(
+                          child: _anyIcon(
                             icon,
                             color: iconColor,
                             size: 32,
@@ -7709,7 +7709,7 @@ Widget _buildMiniActionButton({
                 ),
               ],
             ),
-            child: Icon(icon, color: color, size: 24),
+            child: _anyIcon(icon, color: color, size: 24),
           ),
           const SizedBox(height: 8),
           Text(
@@ -8434,7 +8434,7 @@ Widget _buildMenuItem({
                     ),
                   ],
                 ),
-                child: Icon(
+                child: _anyIcon(
                   icon,
                   color: accentRed,
                   size: 22,
@@ -8592,7 +8592,7 @@ Widget _buildNavItem({
   required int index,
   required Object? icon,
   required String label,
-  required IconData activeIcon,
+  required Object? activeIcon,
 }) {
   bool isActive = _bottomNavIndex == index;
   
@@ -8659,11 +8659,13 @@ Widget _buildNavItem({
                         child: child,
                       );
                     },
-                    child: Icon(
-                      isActive ? activeIcon : icon,
+                    child: KeyedSubtree(
                       key: ValueKey<bool>(isActive),
-                      color: isActive ? bloodRed : Colors.white.withOpacity(0.7),
-                      size: isActive ? 22 : 20,
+                      child: _anyIcon(
+                        isActive ? activeIcon : icon,
+                        color: isActive ? bloodRed : Colors.white.withOpacity(0.7),
+                        size: isActive ? 22 : 20,
+                      ),
                     ),
                   ),
                 ),
@@ -8922,7 +8924,7 @@ class _NewsMediaState extends State<NewsMedia> {
 class _ModernActionCard extends StatelessWidget {
   final String title;
   final String subtitle;
-  final IconData icon;
+  final Object? icon;
   final Color iconColor;
   final Gradient gradient;
   final VoidCallback onTap;
@@ -8995,7 +8997,7 @@ class _ModernActionCard extends StatelessWidget {
                             color: Colors.white.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Icon(icon, color: Colors.white, size: 28),
+                          child: _anyIcon(icon, color: Colors.white, size: 28),
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(
