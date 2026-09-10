@@ -810,8 +810,7 @@ class _DashboardPageTelegramState extends State<DashboardPageTelegram> {
                         ),
                       ],
                     ),
-                    child: const Icon(
-                      FontAwesomeIcons.telegram,
+                    child: const FaIcon(FontAwesomeIcons.telegram,
                       color: Colors.white,
                       size: 30,
                     ),
@@ -956,8 +955,7 @@ class _DashboardPageTelegramState extends State<DashboardPageTelegram> {
                                       ),
                                     ],
                                   ),
-                                  child: const Icon(
-                                    FontAwesomeIcons.telegram,
+                                  child: const FaIcon(FontAwesomeIcons.telegram,
                                     color: Colors.white,
                                     size: 28,
                                   ),
@@ -1404,7 +1402,7 @@ class _DashboardPageTelegramState extends State<DashboardPageTelegram> {
   Widget _buildStatCard({
     required String title,
     required String value,
-    required IconData icon,
+    required FaIconData icon,
     required Color color,
   }) {
     return Container(
@@ -1449,7 +1447,7 @@ class _DashboardPageTelegramState extends State<DashboardPageTelegram> {
 
   Widget _buildActionButton({
     required String title,
-    required IconData icon,
+    required FaIconData icon,
     required Color color,
     required VoidCallback onTap,
   }) {
@@ -1697,8 +1695,7 @@ class _SessionManagerPageState extends State<SessionManagerPage> {
                               ),
                             ],
                           ),
-                          child: const Icon(
-                            FontAwesomeIcons.telegram,
+                          child: const FaIcon(FontAwesomeIcons.telegram,
                             color: Colors.white,
                             size: 30,
                           ),
@@ -1976,8 +1973,7 @@ class _SessionManagerPageState extends State<SessionManagerPage> {
                       colors: isActive ? [_primaryRed, _accentRed] : [_textSecondary, _textSecondary.withOpacity(0.5)],
                     ),
                   ),
-                  child: Icon(
-                    FontAwesomeIcons.telegram,
+                  child: FaIcon(FontAwesomeIcons.telegram,
                     color: Colors.white,
                     size: 22,
                   ),
@@ -2527,7 +2523,7 @@ class _ReportPageState extends State<ReportPage> {
     required String label,
     required String hint,
     required TextEditingController controller,
-    required IconData icon,
+    required FaIconData icon,
     TextInputType? keyboardType,
     String? Function(String?)? validator,
     int maxLines = 1,
@@ -4061,8 +4057,7 @@ Future<void> _handleVerify2FA() async {
                           width: 2,
                         ),
                       ),
-                      child: Icon(
-                        FontAwesomeIcons.telegram,
+                      child: FaIcon(FontAwesomeIcons.telegram,
                         size: 48,
                         color: _textPrimary,
                       ),

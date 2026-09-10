@@ -3321,6 +3321,21 @@ final Color accentGrey = const Color(0xFFCCCCCC);
 
 final Color cardDark = const Color(0xFF1C1C1C);
 
+
+Widget _anyIcon(
+  Object? icon, {
+  Color? color,
+  double? size,
+}) {
+  if (icon is FaIconData) {
+    return FaIcon(icon, color: color, size: size);
+  }
+  if (icon is IconData) {
+    return Icon(icon, color: color, size: size);
+  }
+  return const SizedBox.shrink();
+}
+
 final Color purpleGradientStart = const Color(0xFF8E0000);
 final Color purpleGradientEnd = const Color(0xFFFF1744);
 
@@ -3347,7 +3362,7 @@ final Color purpleGradientEnd = const Color(0xFFFF1744);
               color: primaryPurple.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
-            child: FaIcon(icon, color: lightPurple, size: 16),
+            child: _anyIcon(icon, color: lightPurple, size: 16),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -3610,7 +3625,7 @@ Widget _buildCompactTimeZone({
         ),
         child: Row(
           children: [
-            FaIcon(icon, color: Colors.white70, size: 20),
+            _anyIcon(icon, color: Colors.white70, size: 20),
             const SizedBox(width: 8),
             Expanded(
               child: Column(
@@ -3705,7 +3720,7 @@ Widget _buildRealTimeStatChip({
               ),
             ),
             child: Center(
-              child: FaIcon(
+              child: _anyIcon(
                 icon,
                 color: color,
                 size: 24,
@@ -5457,7 +5472,7 @@ String _getTimeQuote(String period) {
 Widget _buildPrayerTimeCard({
   required String prayerName,
   required String time,
-  required FaIconData icon,
+  required Object? icon,
   required Gradient gradient,
   required bool isNext,
 }) {
@@ -5509,7 +5524,7 @@ Widget _buildPrayerTimeCard({
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
-                      child: FaIcon(
+                      child: Icon(
                         icon,
                         color: Colors.white,
                         size: 18,
@@ -5605,7 +5620,7 @@ Widget _buildPrayerTimeCard({
 Widget _buildSholatCarouselCard({
   required String name,
   required String time,
-  required FaIconData icon,
+  required Object? icon,
   required Gradient gradient,
   required bool isNext,
 }) {
@@ -5658,7 +5673,7 @@ Widget _buildSholatCarouselCard({
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
-                      child: FaIcon(
+                      child: Icon(
                         icon,
                         color: Colors.white,
                         size: 16,
@@ -6978,7 +6993,7 @@ Widget _buildStatChip({
           ),
         ),
         child: Center(
-          child: FaIcon(
+          child: _anyIcon(
             icon,
             color: color,
             size: 24,
@@ -7199,7 +7214,7 @@ Widget _buildActionTile({
                   ),
                 ),
                 child: Center(
-                  child: FaIcon(
+                  child: _anyIcon(
                     icon,
                     color: Colors.white,
                     size: 24,
@@ -7349,7 +7364,7 @@ Widget _buildStatusIndicator({
 
 // Social Button
 Widget _buildSocialButton({
-  required FaIconData icon,
+  required Object? icon,
   required Color color,
   required String label,
   String? url,
@@ -7380,7 +7395,7 @@ Widget _buildSocialButton({
             ),
           ),
           child: Center(
-            child: FaIcon(
+            child: Icon(
               icon,
               color: color,
               size: 24,
@@ -7405,7 +7420,7 @@ Widget _buildSocialButton({
 Widget _buildPremiumCard({
   required String title,
   required String subtitle,
-  required FaIconData icon,
+  required Object? icon,
   required Color iconColor,
   required List<Color> gradientColors,
   required VoidCallback onTap,
@@ -7472,7 +7487,7 @@ Widget _buildPremiumCard({
                           ),
                         ),
                         child: Center(
-                          child: FaIcon(
+                          child: Icon(
                             icon,
                             color: iconColor,
                             size: 32,
@@ -7601,7 +7616,7 @@ Widget _buildPremiumCard({
 
 // Widget untuk Mini Action Button
 Widget _buildMiniActionButton({
-  required FaIconData icon,
+  required Object? icon,
   required String label,
   required Color color,
 }) {
@@ -7619,7 +7634,7 @@ Widget _buildMiniActionButton({
           ),
         ),
         child: Center(
-          child: FaIcon(
+          child: Icon(
             icon,
             color: color,
             size: 28,
@@ -7663,7 +7678,7 @@ Widget _buildMiniActionButton({
   }
 
   Widget _contactActionButton({
-    required FaIconData icon,
+    required Object? icon,
     required String label,
     required String url,
     required Color color,
@@ -7694,7 +7709,7 @@ Widget _buildMiniActionButton({
                 ),
               ],
             ),
-            child: FaIcon(icon, color: color, size: 24),
+            child: Icon(icon, color: color, size: 24),
           ),
           const SizedBox(height: 8),
           Text(
@@ -7750,7 +7765,7 @@ Widget _buildMiniActionButton({
               color: bloodRed.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: bloodRed, size: 20),
+            child: _anyIcon(icon, color: bloodRed, size: 20),
           ),
           const SizedBox(width: 12),
           Text("$label: ", style: const TextStyle(color: Colors.white70)),
@@ -8366,7 +8381,7 @@ Widget _buildDrawer() {
 
 // Helper untuk membuat menu item yang elegan
 Widget _buildMenuItem({
-  required IconData icon,
+  required Object? icon,
   required String title,
   required Color accentRed,
   required Color darkRed,
@@ -8547,9 +8562,9 @@ Widget _buildGlassBottomNavBar() {
                     ),
                     _buildNavItem(
                       index: 1,
-                      icon: Icons.message,
+                      icon: FontAwesomeIcons.whatsapp,
                       label: "WhatsApp",
-                      activeIcon: Icons.message_rounded,
+                      activeIcon: FontAwesomeIcons.whatsappSquare,
                     ),
                     _buildNavItem(
                       index: 2,
@@ -8575,7 +8590,7 @@ Widget _buildGlassBottomNavBar() {
 }
 Widget _buildNavItem({
   required int index,
-  required IconData icon,
+  required Object? icon,
   required String label,
   required IconData activeIcon,
 }) {
@@ -8980,7 +8995,7 @@ class _ModernActionCard extends StatelessWidget {
                             color: Colors.white.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: FaIcon(icon, color: Colors.white, size: 28),
+                          child: Icon(icon, color: Colors.white, size: 28),
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(

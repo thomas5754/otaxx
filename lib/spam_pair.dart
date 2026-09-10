@@ -802,7 +802,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
 
   Widget _buildMenuButton({
     required int index,
-    required IconData icon,
+    required FaIconData icon,
     required String label,
     required LinearGradient gradient,
   }) {
@@ -1256,7 +1256,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
     required String label,
     required Color color,
     required VoidCallback onPressed,
-    required IconData icon,
+    required FaIconData icon,
     required bool isLoading,
   }) {
     return SizedBox(
@@ -1302,7 +1302,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
   }
 
   Widget _buildFormHeader({
-    required IconData icon,
+    required FaIconData icon,
     required String title,
     required String subtitle,
     required LinearGradient gradient,
@@ -1431,7 +1431,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
   Widget _buildNumberInput({
     required TextEditingController controller,
     required String label,
-    required IconData icon,
+    required FaIconData icon,
     required Color color,
   }) {
     return Container(
@@ -1498,7 +1498,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
     required TextEditingController controller,
     required String label,
     required String hint,
-    required IconData icon,
+    required FaIconData icon,
     bool isNumeric = false,
     bool obscureText = false,
   }) {
