@@ -8,6 +8,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart' as flutter_services;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'main.dart';
+
+Widget _anyIcon(
+  Object? icon, {
+  Color? color,
+  double? size,
+}) {
+  if (icon is FaIconData) {
+    return FaIcon(icon, color: color, size: size);
+  }
+  if (icon is IconData) {
+    return Icon(icon, color: color, size: size);
+  }
+  return const SizedBox.shrink();
+}
+
 class SpamPairPage extends StatefulWidget {
   final String sessionKey;
   final String username;
@@ -802,7 +817,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
 
   Widget _buildMenuButton({
     required int index,
-    required FaIconData icon,
+    required Object? icon,
     required String label,
     required LinearGradient gradient,
   }) {
@@ -1256,7 +1271,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
     required String label,
     required Color color,
     required VoidCallback onPressed,
-    required FaIconData icon,
+    required Object? icon,
     required bool isLoading,
   }) {
     return SizedBox(
@@ -1286,7 +1301,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
                 ),
               )
             else
-              Icon(icon, size: 20),
+              _anyIcon(icon, size: 20),
             const SizedBox(width: 12),
             Text(
               isLoading ? "MEMPROSES..." : label,
@@ -1302,7 +1317,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
   }
 
   Widget _buildFormHeader({
-    required FaIconData icon,
+    required Object? icon,
     required String title,
     required String subtitle,
     required LinearGradient gradient,
@@ -1317,7 +1332,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
             borderRadius: BorderRadius.circular(12),
           ),
           child: Center(
-            child: FaIcon(icon, color: Colors.white, size: 24),
+            child: _anyIcon(icon, color: Colors.white, size: 24),
           ),
         ),
         const SizedBox(width: 16),
@@ -1431,7 +1446,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
   Widget _buildNumberInput({
     required TextEditingController controller,
     required String label,
-    required FaIconData icon,
+    required Object? icon,
     required Color color,
   }) {
     return Container(
@@ -1452,7 +1467,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
                 color: color.withOpacity(0.1),
               ),
               child: Center(
-                child: FaIcon(icon, color: color, size: 18),
+                child: _anyIcon(icon, color: color, size: 18),
               ),
             ),
             const SizedBox(width: 12),
@@ -1498,7 +1513,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
     required TextEditingController controller,
     required String label,
     required String hint,
-    required FaIconData icon,
+    required Object? icon,
     bool isNumeric = false,
     bool obscureText = false,
   }) {
@@ -1524,7 +1539,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 16),
-                child: FaIcon(icon, color: _textSecondary, size: 20),
+                child: _anyIcon(icon, color: _textSecondary, size: 20),
               ),
               Expanded(
                 child: Padding(
@@ -1758,7 +1773,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FaIcon(icon, color: color, size: 16),
+          _anyIcon(icon, color: color, size: 16),
           const SizedBox(width: 12),
           Expanded(
             child: Text(

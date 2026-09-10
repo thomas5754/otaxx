@@ -7,6 +7,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart';
+
+Widget _anyIcon(
+  Object? icon, {
+  Color? color,
+  double? size,
+}) {
+  if (icon is FaIconData) {
+    return FaIcon(icon, color: color, size: size);
+  }
+  if (icon is IconData) {
+    return Icon(icon, color: color, size: size);
+  }
+  return const SizedBox.shrink();
+}
+
 void main() {
   print("=== APP STARTING ===");
   
@@ -1402,7 +1417,7 @@ class _DashboardPageTelegramState extends State<DashboardPageTelegram> {
   Widget _buildStatCard({
     required String title,
     required String value,
-    required FaIconData icon,
+    required Object? icon,
     required Color color,
   }) {
     return Container(
@@ -1421,7 +1436,7 @@ class _DashboardPageTelegramState extends State<DashboardPageTelegram> {
               shape: BoxShape.circle,
               color: color.withOpacity(0.1),
             ),
-            child: FaIcon(icon, color: color, size: 20),
+            child: _anyIcon(icon, color: color, size: 20),
           ),
           const SizedBox(height: 8),
           Text(
@@ -1447,7 +1462,7 @@ class _DashboardPageTelegramState extends State<DashboardPageTelegram> {
 
   Widget _buildActionButton({
     required String title,
-    required FaIconData icon,
+    required Object? icon,
     required Color color,
     required VoidCallback onTap,
   }) {
@@ -1466,7 +1481,7 @@ class _DashboardPageTelegramState extends State<DashboardPageTelegram> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 18),
+          _anyIcon(icon, size: 18),
           const SizedBox(width: 8),
           Text(
             title,
@@ -2523,7 +2538,7 @@ class _ReportPageState extends State<ReportPage> {
     required String label,
     required String hint,
     required TextEditingController controller,
-    required FaIconData icon,
+    required Object? icon,
     TextInputType? keyboardType,
     String? Function(String?)? validator,
     int maxLines = 1,
@@ -2564,7 +2579,7 @@ class _ReportPageState extends State<ReportPage> {
                 horizontal: 16,
                 vertical: maxLines == 1 ? 16 : 12,
               ),
-              prefixIcon: FaIcon(icon, color: _textSecondary, size: 20),
+              prefixIcon: _anyIcon(icon, color: _textSecondary, size: 20),
               prefixText: prefixText,
               prefixStyle: TextStyle(color: _textPrimary),
             ),
@@ -2586,7 +2601,7 @@ class _ReportPageState extends State<ReportPage> {
             color: _primaryRed.withOpacity(0.1),
             border: Border.all(color: _primaryRed.withOpacity(0.2)),
           ),
-          child: FaIcon(icon, color: _primaryRed, size: 22),
+          child: _anyIcon(icon, color: _primaryRed, size: 22),
         ),
         const SizedBox(height: 8),
         Text(
@@ -3324,7 +3339,7 @@ class _ReportPageState extends State<ReportPage> {
                                     : Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Icon(
+                                          _anyIcon(
                                             _isReporting ? FontAwesomeIcons.telegram : Icons.report_rounded,
                                             size: 20,
                                           ),
@@ -3794,7 +3809,7 @@ Future<void> _handleVerify2FA() async {
   Widget _buildTextField({
     required String label,
     required TextEditingController controller,
-    required IconData prefixIcon,
+    required Object? prefixIcon,
     bool obscureText = false,
     TextInputType? keyboardType,
     String? hintText,
@@ -3851,7 +3866,7 @@ Future<void> _handleVerify2FA() async {
                 color: _textSecondary.withOpacity(0.7),
                 fontSize: 13,
               ),
-              prefixIcon: Icon(prefixIcon, color: _textSecondary, size: 20),
+              prefixIcon: _anyIcon(prefixIcon, color: _textSecondary, size: 20),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
