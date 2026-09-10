@@ -8997,7 +8997,7 @@ class _ModernActionCard extends StatelessWidget {
                             color: Colors.white.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: icon is FaIconData ? FaIcon(icon, color: Colors.white, size: 28) : icon is IconData ? Icon(icon, color: Colors.white, size: 28) : const SizedBox.shrink(),
+                          child: icon is FaIconData ? FaIcon(icon as FaIconData, color: Colors.white, size: 28) : icon is IconData ? Icon(icon as IconData, color: Colors.white, size: 28) : const SizedBox.shrink(),
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(

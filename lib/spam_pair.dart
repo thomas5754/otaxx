@@ -838,7 +838,7 @@ static String get WHATSAPP_SPAM_URL => "http://127.0.0.1:4113/api/spam/whatsapp"
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              _anyIcon(
                 icon,
                 color: isSelected ? Colors.white : _textSecondary,
                 size: 20,
