@@ -22,6 +22,16 @@ jobs:
       - name: Flutter Pub Get
         run: flutter pub get
 
+      - name: Patch dartssh2 2.14.0 for Dart 3.9+
+        run: |
+          FILE="$HOME/.pub-cache/hosted/pub.dev/dartssh2-2.14.0/lib/src/sftp/sftp_client.dart"
+          sed -i 's/if (bytessRecieved >= length)/if (length != null \&\& bytessRecieved >= length)/' "$FILE"
+
+      - name: Show dartssh2 SFTP source
+        run: |
+          FILE="$HOME/.pub-cache/hosted/pub.dev/dartssh2-2.14.0/lib/src/sftp/sftp_client.dart"
+          sed -n '570,610p' "$FILE"
+
       - name: Build APK
         run: flutter build apk --release
 
