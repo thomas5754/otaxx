@@ -173,12 +173,15 @@ class _LoginPageState extends State<LoginPage>
 
       final validate = await http.post(
         Uri.parse("http://127.0.0.1:4113/validate"),
-        body: {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonEncode({
           "username": username,
           "password": password,
           "androidId": androidId!,
           "version": appVersion,
-        },
+        }),
       );
 
       final validData = jsonDecode(validate.body);
