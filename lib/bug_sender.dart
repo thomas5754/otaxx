@@ -407,3 +407,101 @@ class _BugSenderPageState extends State<BugSenderPage>
             ),
           ],
         ),
+        content: Text(
+          "Apakah Anda yakin ingin menghapus Sender Node ini selamanya? Proses ini tidak dapat dibatalkan.",
+          style: TextStyle(color: _textMuted, fontSize: 13, height: 1.5),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(
+              "CANCEL",
+              style: TextStyle(
+                  color: _textMuted,
+                  fontFamily: 'Orbitron',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11),
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: _gold.withValues(alpha: 0.10),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: _gold.withValues(alpha: 0.3)),
+            ),
+            child: TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text(
+                "PURGE",
+                style: TextStyle(
+                  color: _gold,
+                  fontFamily: 'Orbitron',
+                  fontWeight: FontWeight.w900,
+                  fontSize: 11,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      setState(() => isLoading = true);
+      try {
+        final response = await http.delete(Uri.parse(
+            "https://affecting-gateway-marijuana-borders.trycloudflare.com/deleteSender?key=${widget.sessionKey}&id=$senderId"));
+        if (response.statusCode == 200) {
+          final data = jsonDecode(response.body);
+          if (data["valid"] == true) {
+            _showSnackBar("Node purged successfully.", isError: false);
+            _fetchSenders();
+          } else {
+            _showSnackBar(data["message"] ?? "Failed to purge node",
+                isError: true);
+          }
+        } else {
+          _showSnackBar("Server error: ${response.statusCode}", isError: true);
+        }
+      } catch (e) {
+        _showSnackBar("Connection failed: $e", isError: true);
+      } finally {
+        if (mounted) setState(() => isLoading = false);
+      }
+    }
+  }
+
+  void _showSnackBar(String message, {bool isError = false}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(
+              isError ? Icons.error_outline : Icons.check_circle_outline,
+              color: _bgDeep,
+              size: 20,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                message,
+                style: const TextStyle(
+                  color: _bgDeep,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'ShareTechMono',
+                  fontSize: 13,
+                ),
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: isError ? Colors.orangeAccent : _gold,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        margin: const EdgeInsets.all(16),
+        duration: const Duration(seconds: 3),
+      ),
+    );
+
+    
+  }
