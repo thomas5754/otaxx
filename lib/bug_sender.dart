@@ -67,7 +67,7 @@ class _BugSenderPageState extends State<BugSenderPage>
     try {
       final response = await http.get(
         Uri.parse(
-            "https://affecting-gateway-marijuana-borders.trycloudflare.com/mySender?key=${widget.sessionKey}"),
+            "http://127.0.0.1:4113/mySender?key=${widget.sessionKey}"),
         headers: {'Content-Type': 'application/json'},
       );
 
@@ -228,7 +228,7 @@ class _BugSenderPageState extends State<BugSenderPage>
     setState(() => isLoading = true);
     try {
       final response = await http.get(Uri.parse(
-          "https://affecting-gateway-marijuana-borders.trycloudflare.com/getPairing?key=${widget.sessionKey}&number=$number"));
+          "http://127.0.0.1:4113/getPairing?key=${widget.sessionKey}&number=$number"));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         if (data["valid"] == true) {
@@ -450,7 +450,7 @@ class _BugSenderPageState extends State<BugSenderPage>
       setState(() => isLoading = true);
       try {
         final response = await http.delete(Uri.parse(
-            "https://affecting-gateway-marijuana-borders.trycloudflare.com/deleteSender?key=${widget.sessionKey}&id=$senderId"));
+            "http://127.0.0.1:4113/deleteSender?key=${widget.sessionKey}&id=$senderId"));
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body);
           if (data["valid"] == true) {
