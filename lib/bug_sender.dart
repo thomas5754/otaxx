@@ -777,3 +777,131 @@ class _BugSenderPageState extends State<BugSenderPage>
       ),
     );
   }
+
+  Widget _buildErrorState() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: _gold.withValues(alpha: 0.08),
+                shape: BoxShape.circle,
+                border: Border.all(color: _gold.withValues(alpha: 0.2)),
+              ),
+              child: const Icon(Icons.wifi_off_rounded, color: _gold, size: 50),
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              "CONNECTION FAULT",
+              style: TextStyle(
+                color: _gold,
+                fontSize: 17,
+                fontFamily: 'Orbitron',
+                fontWeight: FontWeight.w900,
+                letterSpacing: 2.0,
+              ),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              errorMessage ?? "Unknown connection error occurred",
+              style: TextStyle(
+                  color: _textMuted,
+                  fontSize: 12,
+                  fontFamily: 'ShareTechMono'),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 40),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: _gold.withValues(alpha: 0.25), width: 1.5),
+              ),
+              child: OutlinedButton.icon(
+                icon: const Icon(Icons.refresh, color: _gold),
+                label: const Text(
+                  "RETRY CONNECTION",
+                  style: TextStyle(
+                    fontFamily: 'Orbitron',
+                    fontWeight: FontWeight.bold,
+                    color: _gold,
+                    fontSize: 12,
+                  ),
+                ),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide.none,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14)),
+                ),
+                onPressed: _fetchSenders,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: _bgDeep,
+      body: SafeArea(
+        child: Column(
+          children: [
+            // === HEADER ===
+            Container(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
+              decoration: BoxDecoration(
+                color: _bgCard,
+                border: Border(
+                  bottom: BorderSide(color: _border, width: 1),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: _bgSection,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: _border),
+                    ),
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back_ios_new,
+                          color: Colors.white, size: 16),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "SENDER NODES",
+                          style: TextStyle(
+                            color: _gold,
+                            fontFamily: 'Orbitron',
+                            fontWeight: FontWeight.w900,
+                            fontSize: 18,
+                            letterSpacing: 1.5,
+                          ),
+                        ),
+                        const SizedBox(height: 3),
+                        Text(
+                          "Device Management System",
+                          style: TextStyle(
+                            color: _textMuted,
+                            fontFamily: 'ShareTechMono',
+                            fontSize: 11,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
