@@ -905,3 +905,110 @@ class _BugSenderPageState extends State<BugSenderPage>
                       ],
                     ),
                   ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: _bgSection,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: _border),
+                    ),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.sync_rounded,
+                        color: isLoading
+                            ? _textSubtle
+                            : _gold.withValues(alpha: 0.7),
+                        size: 20,
+                      ),
+                      onPressed: isLoading ? null : _refreshSenders,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // === STATS BAR ===
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 14, vertical: 12),
+                      decoration: BoxDecoration(
+                        color: _bgCard,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: _gold.withValues(alpha: 0.08)),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(7),
+                            decoration: BoxDecoration(
+                              color: _gold.withValues(alpha: 0.08),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(Icons.hub_outlined,
+                                color: _gold.withValues(alpha: 0.7), size: 16),
+                          ),
+                          const SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${senderList.length}",
+                                style: TextStyle(
+                                  color: Colors.white.withValues(alpha: 0.9),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  fontFamily: 'Orbitron',
+                                ),
+                              ),
+                              Text(
+                                "Active Nodes",
+                                style: TextStyle(
+                                  color: _textMuted,
+                                  fontSize: 10,
+                                  fontFamily: 'ShareTechMono',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 14, vertical: 12),
+                      decoration: BoxDecoration(
+                        color: _bgCard,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: _gold.withValues(alpha: 0.08)),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(7),
+                            decoration: BoxDecoration(
+                              color: _gold.withValues(alpha: 0.08),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(Icons.shield_rounded,
+                                color: _gold.withValues(alpha: 0.7), size: 16),
+                          ),
+                          const SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.role.toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.white.withValues(alpha: 0.9),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                  fontFamily: 'Orbitron',
+                                ),
+                              ),
