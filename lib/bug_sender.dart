@@ -686,3 +686,94 @@ class _BugSenderPageState extends State<BugSenderPage>
     );
   }
   
+  Widget _buildEmptyState() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(30),
+              decoration: BoxDecoration(
+                color: _gold.withValues(alpha: 0.04),
+                shape: BoxShape.circle,
+                border: Border.all(color: _gold.withValues(alpha: 0.12), width: 2),
+                boxShadow: [
+                  BoxShadow(
+                      color: _gold.withValues(alpha: 0.06),
+                      blurRadius: 40,
+                      spreadRadius: 0),
+                ],
+              ),
+              child: Icon(Icons.router_outlined,
+                  color: _gold.withValues(alpha: 0.3), size: 60),
+            ),
+            const SizedBox(height: 30),
+            const Text(
+              "NO ACTIVE NODES",
+              style: TextStyle(
+                color: _gold,
+                fontSize: 17,
+                fontFamily: 'Orbitron',
+                fontWeight: FontWeight.w900,
+                letterSpacing: 2.0,
+              ),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              "Sistem tidak mendeteksi koneksi pengirim.\nTambahkan WhatsApp node pertama Anda.",
+              style: TextStyle(
+                color: _textMuted,
+                fontSize: 12,
+                fontFamily: 'ShareTechMono',
+                height: 1.6,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 40),
+            Container(
+              width: double.infinity,
+              height: 54,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: _gold.withValues(alpha: 0.3), width: 1.5),
+                gradient: LinearGradient(
+                  colors: [
+                    _gold.withValues(alpha: 0.12),
+                    _goldDark.withValues(alpha: 0.06),
+                  ],
+                ),
+                boxShadow: [
+                  BoxShadow(
+                      color: _gold.withValues(alpha: 0.1),
+                      blurRadius: 20,
+                      spreadRadius: 0),
+                ],
+              ),
+              child: ElevatedButton.icon(
+                icon: const Icon(Icons.add_link_rounded, color: _gold, size: 20),
+                label: const Text(
+                  "INITIALIZE SENDER",
+                  style: TextStyle(
+                    color: _gold,
+                    fontFamily: 'Orbitron',
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 1.0,
+                    fontSize: 13,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)),
+                ),
+                onPressed: _showAddSenderDialog,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
