@@ -298,3 +298,112 @@ class _BugSenderPageState extends State<BugSenderPage>
               style: TextStyle(
                   color: _textMuted, fontFamily: 'ShareTechMono', fontSize: 12),
             ),
+            const SizedBox(height: 24),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              decoration: BoxDecoration(
+                color: _bgSection,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: _gold, width: 2),
+                boxShadow: [
+                  BoxShadow(
+                      color: _gold.withValues(alpha: 0.15),
+                      blurRadius: 25,
+                      spreadRadius: -5),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  code,
+                  style: const TextStyle(
+                    color: _gold,
+                    fontSize: 34,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 8,
+                    fontFamily: 'ShareTechMono',
+                    shadows: [Shadow(color: _gold, blurRadius: 12)],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: OutlinedButton.icon(
+                icon: const Icon(Icons.copy_all, color: _gold, size: 18),
+                label: const Text(
+                  "COPY TO CLIPBOARD",
+                  style: TextStyle(
+                    color: _gold,
+                    fontFamily: 'Orbitron',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 11,
+                  ),
+                ),
+                style: OutlinedButton.styleFrom(
+                  side:
+                      BorderSide(color: _gold.withValues(alpha: 0.4), width: 1.5),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                onPressed: () async {
+                  await Clipboard.setData(ClipboardData(text: code));
+                  _showSnackBar("Sequence copied to clipboard!", isError: false);
+                },
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _fetchSenders();
+            },
+            child: Text(
+              "CLOSE & REFRESH",
+              style: TextStyle(
+                  color: _textMuted,
+                  fontFamily: 'Orbitron',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _deleteSender(String senderId) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      barrierColor: Colors.black.withValues(alpha: 0.85),
+      builder: (_) => AlertDialog(
+        backgroundColor: _bgCard,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+          side: BorderSide(color: _gold.withValues(alpha: 0.4), width: 1.5),
+        ),
+        title: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: _gold.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Icon(Icons.warning_amber_rounded,
+                  color: _gold, size: 22),
+            ),
+            const SizedBox(width: 12),
+            const Text(
+              "PURGE NODE",
+              style: TextStyle(
+                  color: _gold,
+                  fontFamily: 'Orbitron',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16),
+            ),
+          ],
+        ),
