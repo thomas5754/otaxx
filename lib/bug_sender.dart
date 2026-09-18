@@ -612,3 +612,77 @@ class _BugSenderPageState extends State<BugSenderPage>
               ],
             ),
           ),
+          Container(
+            height: 1,
+            margin: const EdgeInsets.symmetric(horizontal: 18),
+            color: _border,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(12),
+                      onTap: () => _refreshSenders(),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.sync, size: 16, color: _textMuted),
+                            const SizedBox(width: 8),
+                            Text(
+                              "SYNC",
+                              style: TextStyle(
+                                fontFamily: 'Orbitron',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 11,
+                                color: _textMuted,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(width: 1, height: 20, color: _border),
+                Expanded(
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(12),
+                      onTap: () => _deleteSender(sender['id']),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.delete_outline, size: 16, color: _gold),
+                            const SizedBox(width: 8),
+                            Text(
+                              "PURGE",
+                              style: TextStyle(
+                                fontFamily: 'Orbitron',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 11,
+                                color: _gold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  
