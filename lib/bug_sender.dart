@@ -1012,3 +1012,94 @@ class _BugSenderPageState extends State<BugSenderPage>
                                   fontFamily: 'Orbitron',
                                 ),
                               ),
+                              Text(
+                                "Access Level",
+                                style: TextStyle(
+                                  color: _textMuted,
+                                  fontSize: 10,
+                                  fontFamily: 'ShareTechMono',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // === CONTENT ===
+            Expanded(
+              child: isLoading && senderList.isEmpty
+                  ? const Center(
+                      child:
+                          CircularProgressIndicator(color: _gold, strokeWidth: 2.5))
+                  : errorMessage != null && senderList.isEmpty
+                      ? _buildErrorState()
+                      : senderList.isEmpty
+                          ? _buildEmptyState()
+                          : RefreshIndicator(
+                              color: _gold,
+                              backgroundColor: _bgCard,
+                              onRefresh: _refreshSenders,
+                              child: ListView.builder(
+                                padding:
+                                    const EdgeInsets.only(top: 8, bottom: 100),
+                                physics:
+                                    const AlwaysScrollableScrollPhysics(),
+                                itemCount: senderList.length,
+                                itemBuilder: (context, index) =>
+                                    _buildSenderCard(
+                                        Map<String, dynamic>.from(
+                                            senderList[index]),
+                                        index),
+                              ),
+                            ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: senderList.isNotEmpty
+          ? Container(
+              height: 54,
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: _gold.withValues(alpha: 0.3), width: 1.5),
+                gradient: LinearGradient(
+                  colors: [
+                    _gold.withValues(alpha: 0.12),
+                    _goldDark.withValues(alpha: 0.06),
+                  ],
+                ),
+                boxShadow: [
+                  BoxShadow(
+                      color: _gold.withValues(alpha: 0.12),
+                      blurRadius: 20,
+                      spreadRadius: 0),
+                ],
+              ),
+              child: FloatingActionButton.extended(
+                onPressed: _showAddSenderDialog,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                icon: const Icon(Icons.add_link_rounded, color: _gold, size: 20),
+                label: const Text(
+                  "NEW NODE",
+                  style: TextStyle(
+                    color: _gold,
+                    fontFamily: 'Orbitron',
+                    fontWeight: FontWeight.w900,
+                    fontSize: 12,
+                    letterSpacing: 1,
+                  ),
+                ),
+              ),
+            )
+          : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+}
