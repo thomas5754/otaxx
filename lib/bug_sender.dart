@@ -179,3 +179,122 @@ class _BugSenderPageState extends State<BugSenderPage>
             ),
           ],
         ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              "CANCEL",
+              style: TextStyle(
+                  color: _textMuted,
+                  fontFamily: 'Orbitron',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11),
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: _gold.withValues(alpha: 0.10),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: _gold.withValues(alpha: 0.3)),
+            ),
+            child: TextButton(
+              onPressed: () async {
+                final number = phoneController.text.trim();
+                if (number.isEmpty) {
+                  Navigator.pop(context);
+                  _showSnackBar("Number cannot be empty", isError: true);
+                  return;
+                }
+                Navigator.pop(context);
+                await _addSender(number);
+              },
+              child: const Text(
+                "GENERATE PAIRING",
+                style: TextStyle(
+                  color: _gold,
+                  fontFamily: 'Orbitron',
+                  fontWeight: FontWeight.w900,
+                  fontSize: 11,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _addSender(String number) async {
+    setState(() => isLoading = true);
+    try {
+      final response = await http.get(Uri.parse(
+          "https://affecting-gateway-marijuana-borders.trycloudflare.com/getPairing?key=${widget.sessionKey}&number=$number"));
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data["valid"] == true) {
+          _showPairingCodeDialog(number, data['pairingCode']);
+          _showSnackBar("Pairing sequence generated!", isError: false);
+        } else {
+          _showSnackBar(data['message'] ?? "Pairing failed", isError: true);
+        }
+      } else {
+        _showSnackBar("Server Error: ${response.statusCode}", isError: true);
+      }
+    } catch (e) {
+      _showSnackBar("Connection Fault: $e", isError: true);
+    } finally {
+      setState(() => isLoading = false);
+      _fetchSenders();
+    }
+  }
+
+  void _showPairingCodeDialog(String number, String code) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierColor: Colors.black.withValues(alpha: 0.85),
+      builder: (_) => AlertDialog(
+        backgroundColor: _bgCard,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+          side: BorderSide(color: _gold.withValues(alpha: 0.4), width: 1.5),
+        ),
+        title: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: _gold.withValues(alpha: 0.08),
+                shape: BoxShape.circle,
+                border: Border.all(color: _gold.withValues(alpha: 0.3)),
+                boxShadow: [
+                  BoxShadow(
+                      color: _gold.withValues(alpha: 0.15),
+                      blurRadius: 25,
+                      spreadRadius: 0),
+                ],
+              ),
+              child: const Icon(Icons.qr_code_scanner_rounded,
+                  color: _gold, size: 40),
+            ),
+            const SizedBox(height: 18),
+            const Text(
+              "PAIRING REQUIRED",
+              style: TextStyle(
+                color: _gold,
+                fontFamily: 'Orbitron',
+                fontWeight: FontWeight.w900,
+                fontSize: 16,
+                letterSpacing: 1.5,
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "TARGET: $number",
+              style: TextStyle(
+                  color: _textMuted, fontFamily: 'ShareTechMono', fontSize: 12),
+            ),
