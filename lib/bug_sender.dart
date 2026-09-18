@@ -501,7 +501,5 @@ class _BugSenderPageState extends State<BugSenderPage>
         margin: const EdgeInsets.all(16),
         duration: const Duration(seconds: 3),
       ),
-    );
-
     
   }
